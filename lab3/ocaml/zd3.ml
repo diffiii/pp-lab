@@ -1,8 +1,12 @@
 (* Zadanie 3 *)
 
-let rec sum func a b =
-  if (a > b) then 0
-  else (func a) + (sum func (a + 1) b)
+exception InvalidInput of string
+
+let sum func a b =
+  let rec sumRec n acc =
+    if (n > b) then acc
+    else sumRec (n + 1) (acc + func n)
+  in sumRec a 0
 ;;
 
 
@@ -10,10 +14,12 @@ let funcId x = x;;
 
 let funcSquare x = x * x;;
 
-let rec funcFactorial x =
-  if (x < 0) then 0
-  else if (x <= 1) then 1
-  else x * funcFactorial (x - 1)
+let funcFactorial x =
+  let rec factorialRec n acc =
+    if (n < 0) then raise (InvalidInput "Negative input")
+    else if (n <= 1) then acc
+    else factorialRec (n - 1) (acc * n)
+  in factorialRec x 0
 ;;
 
 

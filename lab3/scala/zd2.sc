@@ -1,8 +1,13 @@
 /* Zadanie 2 */
 
 def sum(func: Int => Int, a: Int, b: Int): Int = {
-  if (a > b) 0
-  else func(a) + sum(func, a + 1, b)
+  @annotation.tailrec
+  def sumRec(n: Int, acc: Int): Int = {
+    if (n > b) acc
+    else sumRec(n + 1, acc + func(n))
+  }
+
+  sumRec(a, 0)
 }
 
 
@@ -11,9 +16,14 @@ def funcId(x: Int): Int = x
 def funcSquare(x: Int): Int = x * x
 
 def funcFactorial(x: Int): Int = {
-  if (x < 0) 0
-  else if (x <= 1) 1
-  else x * funcFactorial(x - 1)
+  @annotation.tailrec
+  def factorialRec(n: Int, acc: Int): Int = {
+    if (n < 0) throw new IllegalArgumentException("Negative value")
+    else if (n <= 1) acc
+    else factorialRec(n - 1, acc * n)
+  }
+
+  factorialRec(x, 0)
 }
 
 

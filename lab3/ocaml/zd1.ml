@@ -1,9 +1,19 @@
 (* Zadanie 1 *)
 
-let rec przetworzListe list func =
-  match list with
-  | [] -> []
-  | head :: tail -> (func head) :: (przetworzListe tail func)
+let odwroc list =
+  let rec odwroc_rec list acc =
+    match list with
+    | [] -> acc
+    | head :: tail -> odwroc_rec tail (head :: acc)
+  in odwroc_rec list []
+;;
+
+let przetworzListe list func =
+  let rec przetworzListeRec acc list =
+    match list with
+    | [] -> odwroc acc
+    | head :: tail -> przetworzListeRec (func head :: acc) tail
+  in przetworzListeRec [] list
 ;;
 
 
