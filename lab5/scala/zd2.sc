@@ -16,6 +16,7 @@ def tree_my(tree: BinaryTree[Int], function: Int => Int): Int = {
     }
   }
 
+  if tree == null then throw new IllegalArgumentException("Tree is null")
   if tree == Empty[Int]() then 0
   else tree_my_rec(List(tree), 1)
 }
@@ -40,3 +41,5 @@ Console.println(tree_my_sq(Node(1,
 )))
 
 Console.println(tree_my_sq(Empty[Int]()))
+
+Console.println(tree_my_sq(null))
