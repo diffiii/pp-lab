@@ -28,7 +28,7 @@ let evaluate instructions =
         match stack with
         | first :: second :: rest -> aux tail ((first <> second) :: rest)
         | _ -> raise (Error "Not enough arguments for `Xor`"))
-  in 
+  in
   match aux instructions [] with
   | [result] -> result
   | _ -> raise (Error "Invalid expression")
